@@ -1,0 +1,125 @@
+/* Tab Area Recorder - Injected Overlay Styles */
+
+#tar-root {
+  position: fixed;
+  inset: 0;
+  z-index: 2147483646;
+  pointer-events: none;
+  user-select: none;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+/* Pure crop target element - has ZERO border/fill so nothing leaks into video */
+#tar-crop-target {
+  position: fixed;
+  pointer-events: none;
+  background: transparent;
+  border: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* Visual frame rendered strictly OUTSIDE the crop target area */
+#tar-selection-frame {
+  position: fixed;
+  pointer-events: auto;
+  cursor: move;
+  box-sizing: content-box;
+  border: 2px dashed #ef4444;
+  box-shadow: 0 0 0 9999px rgba(0, 0, 0, 0.45);
+  background: transparent;
+  transition: border-color 0.15s ease;
+}
+
+#tar-selection-frame.tar-recording {
+  pointer-events: none;
+  cursor: default;
+  border: 2px solid #ef4444;
+  box-shadow: none;
+}
+
+#tar-selection-frame.tar-paused {
+  pointer-events: none;
+  cursor: default;
+  border: 2px dashed #f59e0b;
+  box-shadow: none;
+}
+
+/* Resize handles (only active before recording starts) */
+.tar-handle {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background: #ffffff;
+  border: 2px solid #ef4444;
+  border-radius: 2px;
+  box-sizing: border-box;
+}
+
+#tar-selection-frame.tar-recording .tar-handle,
+#tar-selection-frame.tar-paused .tar-handle {
+  display: none;
+}
+
+.tar-handle.nw { top: -6px; left: -6px; cursor: nwse-resize; }
+.tar-handle.ne { top: -6px; right: -6px; cursor: nesw-resize; }
+.tar-handle.sw { bottom: -6px; left: -6px; cursor: nesw-resize; }
+.tar-handle.se { bottom: -6px; right: -6px; cursor: nwse-resize; }
+.tar-handle.n  { top: -6px; left: calc(50% - 5px); cursor: ns-resize; }
+.tar-handle.s  { bottom: -6px; left: calc(50% - 5px); cursor: ns-resize; }
+.tar-handle.w  { top: calc(50% - 5px); left: -6px; cursor: ew-resize; }
+.tar-handle.e  { top: calc(50% - 5px); right: -6px; cursor: ew-resize; }
+
+/* Minimal control bar - positioned outside the crop region, ONLY Start/Pause & Stop buttons */
+#tar-controls {
+  position: fixed;
+  z-index: 2147483647;
+  pointer-events: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px;
+  background: #18181b;
+  border: 1px solid #3f3f46;
+  border-radius: 8px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
+}
+
+.tar-btn {
+  appearance: none;
+  border: none;
+  outline: none;
+  padding: 6px 14px;
+  border-radius: 5px;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.2;
+  cursor: pointer;
+  color: #ffffff;
+  transition: opacity 0.15s ease, background-color 0.15s ease;
+}
+
+.tar-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+#tar-btn-start-pause {
+  background: #ef4444;
+}
+
+#tar-btn-start-pause.is-recording {
+  background: #f59e0b;
+}
+
+#tar-btn-start-pause.is-paused {
+  background: #10b981;
+}
+
+#tar-btn-stop {
+  background: #3f3f46;
+}
+
+#tar-btn-stop:not(:disabled):hover {
+  background: #52525b;
+}
