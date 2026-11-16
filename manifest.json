@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
   "name": "Tab Area Recorder",
-  "version": "1.0.0",
-  "description": "Record a selected area of the current tab at default resolution & quality with system audio and unmuted microphone.",
+  "version": "1.2.0",
+  "description": "Record the current tab area at default size & quality with clear unprocessed stereo system audio, manual mic mute/unmute, and seekable playback.",
   "permissions": [
     "activeTab",
     "scripting"

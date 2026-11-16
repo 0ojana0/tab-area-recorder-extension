@@ -6,10 +6,8 @@ chrome.action.onClicked.addListener(async (tab) => {
   }
 
   try {
-    // Try toggling existing overlay if already injected
     await chrome.tabs.sendMessage(tab.id, { type: "TAR_TOGGLE_UI" });
   } catch {
-    // Inject CSS and Content Script on first click
     await chrome.scripting.insertCSS({
       target: { tabId: tab.id },
       files: ["recorder.css"]

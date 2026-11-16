@@ -9,7 +9,7 @@
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 }
 
-/* Pure crop target element - has ZERO border/fill so nothing leaks into video */
+/* Pure crop target element - zero border/fill so nothing leaks into video */
 #tar-crop-target {
   position: fixed;
   pointer-events: none;
@@ -19,14 +19,14 @@
   padding: 0;
 }
 
-/* Visual frame rendered strictly OUTSIDE the crop target area */
+/* Visual selection frame rendered outside the crop target area */
 #tar-selection-frame {
   position: fixed;
   pointer-events: auto;
   cursor: move;
-  box-sizing: content-box;
+  box-sizing: border-box;
   border: 2px dashed #ef4444;
-  box-shadow: 0 0 0 9999px rgba(0, 0, 0, 0.45);
+  box-shadow: 0 0 0 9999px rgba(0, 0, 0, 0.42);
   background: transparent;
   transition: border-color 0.15s ease;
 }
@@ -34,7 +34,7 @@
 #tar-selection-frame.tar-recording {
   pointer-events: none;
   cursor: default;
-  border: 2px solid #ef4444;
+  border-color: transparent;
   box-shadow: none;
 }
 
@@ -45,7 +45,7 @@
   box-shadow: none;
 }
 
-/* Resize handles (only active before recording starts) */
+/* Resize handles (active before recording starts) */
 .tar-handle {
   position: absolute;
   width: 10px;
@@ -61,16 +61,16 @@
   display: none;
 }
 
-.tar-handle.nw { top: -6px; left: -6px; cursor: nwse-resize; }
-.tar-handle.ne { top: -6px; right: -6px; cursor: nesw-resize; }
-.tar-handle.sw { bottom: -6px; left: -6px; cursor: nesw-resize; }
-.tar-handle.se { bottom: -6px; right: -6px; cursor: nwse-resize; }
-.tar-handle.n  { top: -6px; left: calc(50% - 5px); cursor: ns-resize; }
-.tar-handle.s  { bottom: -6px; left: calc(50% - 5px); cursor: ns-resize; }
-.tar-handle.w  { top: calc(50% - 5px); left: -6px; cursor: ew-resize; }
-.tar-handle.e  { top: calc(50% - 5px); right: -6px; cursor: ew-resize; }
+.tar-handle.nw { top: -5px; left: -5px; cursor: nwse-resize; }
+.tar-handle.ne { top: -5px; right: -5px; cursor: nesw-resize; }
+.tar-handle.sw { bottom: -5px; left: -5px; cursor: nesw-resize; }
+.tar-handle.se { bottom: -5px; right: -5px; cursor: nwse-resize; }
+.tar-handle.n  { top: -5px; left: calc(50% - 5px); cursor: ns-resize; }
+.tar-handle.s  { bottom: -5px; left: calc(50% - 5px); cursor: ns-resize; }
+.tar-handle.w  { top: calc(50% - 5px); left: -5px; cursor: ew-resize; }
+.tar-handle.e  { top: calc(50% - 5px); right: -5px; cursor: ew-resize; }
 
-/* Minimal control bar - positioned outside the crop region, ONLY Start/Pause & Stop buttons */
+/* Minimal control bar: Start/Pause, Stop, and Mic Mute/Unmute */
 #tar-controls {
   position: fixed;
   z-index: 2147483647;
@@ -89,7 +89,7 @@
   appearance: none;
   border: none;
   outline: none;
-  padding: 6px 14px;
+  padding: 6px 13px;
   border-radius: 5px;
   font-size: 13px;
   font-weight: 600;
@@ -97,6 +97,7 @@
   cursor: pointer;
   color: #ffffff;
   transition: opacity 0.15s ease, background-color 0.15s ease;
+  white-space: nowrap;
 }
 
 .tar-btn:disabled {
@@ -122,4 +123,13 @@
 
 #tar-btn-stop:not(:disabled):hover {
   background: #52525b;
+}
+
+#tar-btn-mic {
+  background: #2563eb;
+}
+
+#tar-btn-mic.is-muted {
+  background: #52525b;
+  color: #d4d4d8;
 }
